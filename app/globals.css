@@ -1,0 +1,79 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: 210 40% 98%;
+  --foreground: 222 47% 11%;
+  --muted: 210 40% 96%;
+  --border: 214 32% 91%;
+  --card: 0 0% 100%;
+  --accent: 199 89% 48%;
+  --primary: 221 83% 53%;
+  --secondary: 217 33% 17%;
+}
+
+.dark {
+  --background: 224 47% 6%;
+  --foreground: 210 40% 96%;
+  --muted: 222 47% 11%;
+  --border: 217 33% 18%;
+  --card: 222 47% 9%;
+  --accent: 188 95% 43%;
+  --primary: 210 100% 66%;
+  --secondary: 215 27% 84%;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  min-height: 100vh;
+  color: hsl(var(--foreground));
+  background:
+    radial-gradient(circle at top left, rgba(56, 189, 248, 0.18), transparent 28%),
+    radial-gradient(circle at top right, rgba(59, 130, 246, 0.16), transparent 24%),
+    linear-gradient(180deg, rgba(15, 23, 42, 0.04), transparent 32%),
+    hsl(var(--background));
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background-image: radial-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 0);
+  background-size: 24px 24px;
+  mask-image: linear-gradient(to bottom, white, transparent 85%);
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply antialiased;
+  }
+}
+
+@layer components {
+  .surface {
+    @apply rounded-3xl border border-white/10 bg-card/80 backdrop-blur-xl shadow-glow;
+  }
+
+  .section-shell {
+    @apply surface relative overflow-hidden px-6 py-8 sm:px-8 sm:py-10;
+  }
+
+  .eyebrow {
+    @apply text-xs font-semibold uppercase tracking-[0.32em] text-cyan-400;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
