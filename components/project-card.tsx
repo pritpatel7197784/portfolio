@@ -1,8 +1,10 @@
+import type { ReactNode } from "react";
+
 type ProjectCardProps = {
   title: string;
-  problem: string;
-  solution: string;
-  impact: string;
+  problem: ReactNode;
+  solution: ReactNode;
+  impact: ReactNode;
 };
 
 export function ProjectCard({
@@ -18,15 +20,15 @@ export function ProjectCard({
       <div className="mt-6 space-y-5">
         <div>
           <p className="text-xs uppercase tracking-[0.24em] text-foreground/55">Problem</p>
-          <p className="mt-2 text-sm leading-7 text-foreground/72">{problem}</p>
+          <div className="mt-2 text-sm leading-7 text-foreground/72">{problem}</div>
         </div>
         <div>
           <p className="text-xs uppercase tracking-[0.24em] text-foreground/55">Solution</p>
-          <p className="mt-2 text-sm leading-7 text-foreground/72">{solution}</p>
+          <div className="mt-2 text-sm leading-7 text-foreground/72">{solution}</div>
         </div>
         <div>
           <p className="text-xs uppercase tracking-[0.24em] text-foreground/55">Impact</p>
-          <p className="mt-2 text-sm leading-7 text-cyan-300">{impact}</p>
+          <div className="mt-2 text-sm leading-7 text-cyan-300">{impact}</div>
         </div>
       </div>
     </article>

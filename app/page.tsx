@@ -1,3 +1,5 @@
+import type { ReactNode } from "react";
+import Image from "next/image";
 import {
   ArrowRight,
   BriefcaseBusiness,
@@ -15,11 +17,24 @@ import { ProjectCard } from "@/components/project-card";
 import { SectionHeading } from "@/components/section-heading";
 import { ThemeToggle } from "@/components/theme-toggle";
 
-const metrics = [
-  { value: 90, suffix: "%", label: "Faster enterprise onboarding through workflow automation" },
-  { value: 40, suffix: "+", label: "Locales supported through global authentication rollout" },
-  { value: 6, suffix: "+", label: "Years building backend platforms and distributed services" },
-  { value: 24, suffix: "/7", label: "Reliability mindset for critical identity and access systems" }
+type Metric = {
+  value: number;
+  suffix: string;
+  label: string;
+};
+
+type Project = {
+  title: string;
+  problem: ReactNode;
+  solution: ReactNode;
+  impact: ReactNode;
+};
+
+const metrics: Metric[] = [
+  { value: 90, suffix: "%", label: "Faster onboarding through enterprise workflow automation" },
+  { value: 100, suffix: "+", label: "Applications onboarded with RBAC, MFA, SSO, and 15+ post-login actions" },
+  { value: 100, suffix: "+", label: "Business-critical analytics dashboards delivered on AWS data platforms" },
+  { value: 6, suffix: "+", label: "Years building distributed systems and high-availability backend platforms" }
 ];
 
 const impactCards = [
@@ -52,7 +67,11 @@ const skillGroups = [
   },
   {
     title: "Backend & Systems",
-    items: ["Java", "Spring Boot", "Microservices", "REST APIs", "Distributed Systems", "Concurrency", "High Availability", "Async Processing"]
+    items: ["Java", "Spring Boot", "Microservices", "REST APIs", "Distributed Systems", "Concurrency", "High Availability", "Async Processing", "Kafka", "Event Streaming", "Cassandra", "Distributed Data Modeling"]
+  },
+  {
+    title: "Frontend & Experience",
+    items: ["Angular", "TypeScript", "HTML", "CSS", "Authentication UX (Login, MFA, Session Flows)"]
   },
   {
     title: "Cloud & DevOps",
@@ -60,33 +79,78 @@ const skillGroups = [
   }
 ];
 
-const projects = [
+const projects: Project[] = [
   {
     title: "Enterprise IAM Onboarding Platform",
-    problem:
-      "Enterprise application onboarding depended on fragmented manual coordination across identity, infrastructure, and security teams, creating delays, risk, and inconsistent controls.",
-    solution:
-      "Architected an end-to-end onboarding platform integrating ServiceNow, Terraform, Auth0, and Vault, with secure automated provisioning, post-login actions, MFA, risk-based authentication, and SSO built into the workflow model.",
-    impact:
-      "Reduced onboarding time by 90% while improving scalability, compliance posture, and platform consistency across enterprise systems."
+    problem: (
+      <>
+        <strong>Manual onboarding</strong> slowed delivery across identity, infrastructure, and security teams.
+        <br />
+        Controls were inconsistent and difficult to scale.
+      </>
+    ),
+    solution: (
+      <>
+        <strong>Architected</strong> an end-to-end platform integrating ServiceNow, Terraform, Auth0, and Vault.
+        <br />
+        Integrated <strong>RBAC</strong>, <strong>MFA</strong>, <strong>SSO</strong>, and 15+ post-login automation workflows into a unified onboarding system.
+      </>
+    ),
+    impact: (
+      <>
+        Delivered a <strong>90% reduction</strong> in onboarding time.
+        <br />
+        Improved <strong>scalability</strong>, <strong>compliance</strong>, and platform consistency.
+      </>
+    )
   },
   {
     title: "Global Universal Login Rollout",
-    problem:
-      "Global authentication needed to scale across markets without weakening control frameworks or creating inconsistent user access patterns.",
-    solution:
-      "Designed configuration services and authentication extensions supporting dynamic claims, adaptive controls, and secure extensibility across a 40+ locale environment.",
-    impact:
-      "Enabled enterprise-scale authentication with stronger security controls and a more consistent access experience across international deployments."
+    problem: (
+      <>
+        <strong>Global login</strong> needed to scale without weakening controls.
+        <br />
+        Regional experiences risked becoming fragmented.
+      </>
+    ),
+    solution: (
+      <>
+        <strong>Designed</strong> configuration services, <strong>Auth0 Actions</strong>, and adaptive authentication.
+        <br />
+        Enabled secure extensibility across a 40+ locale environment.
+      </>
+    ),
+    impact: (
+      <>
+        Enabled <strong>40+ locales</strong> with stronger security controls.
+        <br />
+        Delivered a more consistent enterprise authentication experience.
+      </>
+    )
   },
   {
     title: "Analytics Platform Modernization",
-    problem:
-      "Business teams needed reliable, scalable analytics infrastructure to support reporting and data-driven decision-making across high-volume operational datasets.",
-    solution:
-      "Designed and developed microservices, data workflows, and AWS-backed services using S3, Athena, QuickSight, CloudWatch, EC2, and Secrets Manager to support large-scale data migration and reporting delivery.",
-    impact:
-      "Delivered 100+ business-critical analytics dashboards and strengthened decision-making with reliable, observable, production-grade data services."
+    problem: (
+      <>
+        <strong>Business teams</strong> needed reliable analytics on high-volume data.
+        <br />
+        Slow reporting cycles limited decision speed.
+      </>
+    ),
+    solution: (
+      <>
+        <strong>Designed</strong> <strong>Microservices</strong> and AWS workflows using S3, Athena, QuickSight, and CloudWatch.
+        <br />
+        Supported large-scale migration and reporting delivery.
+      </>
+    ),
+    impact: (
+      <>
+        Delivered <strong>100+ dashboards</strong> for business-critical reporting.
+        <br />
+        Increased reliability and decision speed with production-grade data services.
+      </>
+    )
   }
 ];
 
@@ -117,7 +181,7 @@ const experiences = [
 const leadershipItems = [
   "Led architecture decisions across identity, infrastructure, and application domains with a clear focus on business leverage and operational control.",
   "Directed cross-team delivery by translating stakeholder priorities into secure platform capabilities and executable engineering roadmaps.",
-  "Standardized reusable service patterns that accelerated delivery, improved consistency, and reduced enterprise platform risk.",
+  "Engineered identity customization layer using Auth0 Management APIs, enabling dynamic translations, partial UI templates, and scalable multi-language login experiences.",
   "Owned outcomes across design, implementation, deployment, and production support with accountability for reliability and adoption."
 ];
 
@@ -144,14 +208,29 @@ export default function Home() {
           <div className="absolute inset-0 bg-grid bg-[size:64px_64px] opacity-[0.08]" />
           <div className="relative grid gap-10 lg:grid-cols-[1.2fr_0.8fr]">
             <div className="space-y-8">
-              <div className="space-y-5">
-                <p className="eyebrow">Distributed Systems & Platform Engineering</p>
-                <h1 className="max-w-4xl text-4xl font-semibold leading-tight text-balance sm:text-5xl lg:text-6xl">
-                  Senior Software Engineer building scalable, secure enterprise platforms with <span className="text-cyan-400">90% automation</span> impact.
-                </h1>
-                <p className="max-w-2xl text-lg leading-8 text-foreground/74 sm:text-xl">
-                  Focused on distributed systems, platform engineering, event-driven architecture, and scalable backend services. Delivering secure enterprise platforms that improve automation, reliability, and operating efficiency across complex environments.
-                </p>
+              <div className="flex flex-col gap-6 sm:gap-7 lg:flex-row lg:items-start lg:justify-between">
+                <div className="space-y-5">
+                  <p className="eyebrow">Distributed Systems & Platform Engineering</p>
+                  <h1 className="max-w-5xl text-4xl font-semibold leading-[1.05] text-balance sm:text-5xl lg:text-[3.35rem]">
+                    Senior Backend &amp; Platform Engineer building identity-driven systems and enterprise automation at scale
+                  </h1>
+                  <p className="max-w-3xl text-lg leading-8 text-foreground/74 sm:text-xl">
+                    Specializing in distributed systems, IAM (Auth0, OAuth2, SAML), and event-driven architecture. Delivered 90% faster onboarding by designing secure, scalable enterprise platforms used across global environments.
+                  </p>
+                </div>
+
+                <div className="flex justify-center lg:justify-end lg:pt-1">
+                  <div className="relative h-[100px] w-[100px] overflow-hidden rounded-full border border-cyan-400/30 shadow-[0_0_0_1px_rgba(34,211,238,0.08),0_18px_45px_rgba(15,23,42,0.28)] sm:h-[120px] sm:w-[120px] lg:h-[140px] lg:w-[140px]">
+                    <Image
+                      src="/pritesh-profile.png"
+                      alt="Pritesh Patel - Senior Backend and IAM Engineer"
+                      fill
+                      priority
+                      sizes="(max-width: 639px) 100px, (max-width: 1023px) 120px, 140px"
+                      className="object-cover object-[center_18%]"
+                    />
+                  </div>
+                </div>
               </div>
 
               <div className="flex flex-wrap gap-4">
@@ -162,25 +241,29 @@ export default function Home() {
                   View Architecture <ArrowRight className="h-4 w-4" />
                 </a>
                 <a
-                  href="/Pritesh-Patel-Resume.pdf"
-                  download
+                  href="#projects"
                   className="inline-flex items-center gap-2 rounded-full border border-white/15 px-5 py-3 text-sm font-semibold transition hover:border-cyan-400/60 hover:text-cyan-300"
                 >
-                  Download Resume <Download className="h-4 w-4" />
+                  Explore Projects <ArrowRight className="h-4 w-4" />
                 </a>
                 <a
-                  href="#contact"
+                  href="/Pritesh-Patel-Resume.pdf"
+                  download
                   className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-5 py-3 text-sm font-semibold transition hover:bg-white/10"
                 >
-                  Contact Me <Mail className="h-4 w-4" />
+                  Download Resume (ATS Optimized) <Download className="h-4 w-4" />
                 </a>
               </div>
+
+              <p className="text-sm text-foreground/45">
+                Worked on platforms at: UPS • Amazon • Avis Budget Group
+              </p>
 
               <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
                 {metrics.map((metric) => (
                   <div
                     key={metric.label}
-                    className="rounded-2xl border border-white/10 bg-background/40 p-5 transition duration-300 hover:border-cyan-400/40 hover:bg-background/60"
+                    className="flex min-h-[11rem] flex-col rounded-2xl border border-white/10 bg-background/40 p-5 transition duration-300 hover:border-cyan-400/40 hover:bg-background/60"
                   >
                     <p className="text-3xl font-semibold text-foreground">
                       <AnimatedCounter value={metric.value} suffix={metric.suffix} />
@@ -203,9 +286,9 @@ export default function Home() {
 
               <div className="mt-8 grid gap-4">
                 {[
-                  "Event-driven orchestration for enterprise onboarding, provisioning, and workflow automation",
-                  "Integrated platform, infrastructure, and security services into a scalable operating model",
-                  "Delivered measurable gains in speed, control, and business efficiency across enterprise systems"
+                  "Platform orchestration for onboarding, provisioning, and workflow automation",
+                  "Scalable operating model across backend, infrastructure, and security services",
+                  "Measured gains in delivery speed, control, and business efficiency"
                 ].map((item) => (
                   <div key={item} className="rounded-2xl border border-white/10 bg-white/5 p-4">
                     <p className="text-sm leading-6 text-foreground/78">{item}</p>
@@ -247,11 +330,21 @@ export default function Home() {
           <SectionHeading
             eyebrow="Architecture"
             title="A platform blueprint for secure IAM onboarding"
-            description="A flagship architecture narrative that highlights scalability, security depth, compliance readiness, and full-lifecycle platform ownership."
+            description="A flagship architecture narrative highlighting async orchestration, scalable onboarding, security controls, and full-lifecycle platform ownership."
           />
           <div className="mt-8 grid gap-8 lg:grid-cols-[1.15fr_0.85fr]">
             <ArchitectureFlow />
             <div className="grid gap-4">
+              <div className="rounded-3xl border border-white/10 bg-white/[0.03] p-6">
+                <p className="text-sm leading-7 text-foreground/72">
+                  Built on event streaming (Kafka), async orchestration, and resilient retry patterns for enterprise-scale onboarding.
+                </p>
+              </div>
+              <div className="rounded-3xl border border-cyan-400/20 bg-cyan-400/5 p-6">
+                <p className="text-sm leading-7 text-foreground/78">
+                  Event-driven architecture enabling async orchestration and scalable onboarding.
+                </p>
+              </div>
               {[
                 {
                   title: "Event-Driven Design",
@@ -281,7 +374,7 @@ export default function Home() {
             title="Grouped around enterprise delivery"
             description="Organized to show depth in identity, backend systems, and cloud operations through the lens of enterprise platform delivery."
           />
-          <div className="mt-8 grid gap-5 lg:grid-cols-3">
+          <div className="mt-8 grid gap-5 lg:grid-cols-2 xl:grid-cols-4">
             {skillGroups.map((group) => (
               <article key={group.title} className="rounded-3xl border border-white/10 bg-white/[0.03] p-6">
                 <h3 className="text-xl font-semibold">{group.title}</h3>
@@ -348,14 +441,14 @@ export default function Home() {
         <section id="contact" className="section-shell mb-8">
           <SectionHeading
             eyebrow="Contact"
-            title="Open to conversations about platform leadership, IAM transformation, and enterprise backend strategy"
-            description="Built to make the next step easy for recruiters, hiring managers, and executive stakeholders."
+            title="Open to Senior / Staff Backend, Platform, and Identity Engineering roles"
+            description="Focused on distributed systems, IAM platforms, and enterprise-scale backend architecture. Available for immediate conversations with hiring managers and technical teams."
           />
           <div className="mt-8 grid gap-5 lg:grid-cols-[1fr_0.8fr]">
             <div className="rounded-3xl border border-white/10 bg-gradient-to-br from-cyan-400/12 to-transparent p-6">
-              <h3 className="text-2xl font-semibold">Let’s talk about enterprise identity at scale.</h3>
+              <h3 className="text-2xl font-semibold">Let's talk about platform engineering at scale.</h3>
               <p className="mt-4 max-w-xl text-sm leading-7 text-foreground/74">
-                Open to conversations about enterprise identity, secure platform architecture, and backend systems that improve speed, control, and reliability in regulated environments.
+                Focused on distributed systems, IAM platforms, and enterprise-scale backend architecture. Available for immediate conversations with hiring managers and technical teams.
               </p>
               <div className="mt-8 flex flex-wrap gap-4">
                 <a
